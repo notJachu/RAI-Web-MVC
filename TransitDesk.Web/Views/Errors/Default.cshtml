@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Error " + ViewBag.StatusCode;
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-1">@ViewBag.StatusCode</h1>
+    <h2>An error occured</h2>
+    <p class="lead">An unexpected error ocured (code: @ViewBag.StatusCode).</p>
+    <a href="/" class="btn btn-primary">Back to home</a>
+</div>
