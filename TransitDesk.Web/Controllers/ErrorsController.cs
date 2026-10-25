@@ -5,6 +5,7 @@ namespace TransitDesk.Web.Controllers
     public class ErrorsController : Controller
     {
         [Route("Errors/Status")]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Status(int code)
         {
             Response.StatusCode = code;
