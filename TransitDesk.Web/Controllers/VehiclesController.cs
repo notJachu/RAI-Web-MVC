@@ -15,4 +15,10 @@ public class VehiclesController : Controller
     {
         return View();
     }
+    
+    [HttpGet("pojazd/create")]
+    public async Task<IActionResult> GetVehicleCreatePage()
+    {
+        return View("Create");
+    }
 }

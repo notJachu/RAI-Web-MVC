@@ -1,0 +1,30 @@
+@model TransitDesk.Web.Models.VehicleViewModel
+
+@{
+    ViewData["Title"] = "Rejestracja Nowego Pojazdu";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Vehicles" asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="SideNumber" class="form-label"></label>
+        <input asp-for="SideNumber" class="form-control" />
+        <span asp-validation-for="SideNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ModelName" class="form-label"></label>
+        <input asp-for="ModelName" class="form-control" />
+        <span asp-validation-for="ModelName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="IsLowFloor" class="form-check-input" />
+        <label asp-for="IsLowFloor" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz pojazd w rejestrze</button>
+</form>
