@@ -1,3 +1,5 @@
+using TransitDesk.Web.Constraints;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -9,6 +11,11 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(15);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+});
+
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.ConstraintMap.Add("fleetSideNo", typeof(FleetSideNumberConstraint));
 });
 
 var app = builder.Build();

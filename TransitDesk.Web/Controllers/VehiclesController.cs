@@ -10,7 +10,7 @@ public class VehiclesController : Controller
         return View();
     }
 
-    [HttpGet("pojazd/{number:fleetSideNumber}")]
+    [HttpGet("pojazd/{number:fleetSideNo}")]
     public async Task<IActionResult> GetVehicle(int number)
     {
         return View();
