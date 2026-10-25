@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitDesk.Core", "TransitDesk.Core\TransitDesk.Core.csproj", "{4A90ED3E-E67B-41C1-8195-89F8CCC08E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitDesk.Web", "TransitDesk.Web\TransitDesk.Web.csproj", "{A9E9FE2D-96A1-4DE4-B8E9-74E308CF41DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransitDesk.Tests", "TransitDesk.Tests\TransitDesk.Tests.csproj", "{47E97882-A7B4-46F3-9E1D-10FE505B70B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A90ED3E-E67B-41C1-8195-89F8CCC08E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A90ED3E-E67B-41C1-8195-89F8CCC08E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A90ED3E-E67B-41C1-8195-89F8CCC08E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A90ED3E-E67B-41C1-8195-89F8CCC08E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9E9FE2D-96A1-4DE4-B8E9-74E308CF41DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E9FE2D-96A1-4DE4-B8E9-74E308CF41DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E9FE2D-96A1-4DE4-B8E9-74E308CF41DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E9FE2D-96A1-4DE4-B8E9-74E308CF41DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E97882-A7B4-46F3-9E1D-10FE505B70B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E97882-A7B4-46F3-9E1D-10FE505B70B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E97882-A7B4-46F3-9E1D-10FE505B70B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E97882-A7B4-46F3-9E1D-10FE505B70B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
