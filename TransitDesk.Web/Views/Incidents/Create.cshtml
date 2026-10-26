@@ -1,0 +1,41 @@
+@model TransitDesk.Web.Models.IncidentViewModel
+
+@{
+    ViewData["Title"] = "Zgłaszanie Nowego Incydentu";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-controller="Incidents" asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="VehicleSideNumber" class="form-label"></label>
+        <input asp-for="VehicleSideNumber" class="form-control" type="number" />
+        <span asp-validation-for="VehicleSideNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LineNumber" class="form-label"></label>
+        <input asp-for="LineNumber" class="form-control" />
+        <span asp-validation-for="LineNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OccurredAt" class="form-label"></label>
+        <input asp-for="OccurredAt" class="form-control" type="datetime-local" />
+        <span asp-validation-for="OccurredAt" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zgłoś incydent</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
