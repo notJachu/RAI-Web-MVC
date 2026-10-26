@@ -7,6 +7,7 @@ public class IncidentsController : Controller
 {
 
   [HttpPost]
+  [AuditLog]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(IncidentViewModel model, IFormFile? attachmentFile)
     {

@@ -17,6 +17,7 @@ public class VehiclesController : Controller
     }
     
     [HttpGet("pojazd/create")]
+    [AuditLog]
     public async Task<IActionResult> GetVehicleCreatePage()
     {
         return View("Create");
