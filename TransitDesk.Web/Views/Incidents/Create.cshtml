@@ -6,7 +6,7 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-controller="Incidents" asp-action="Create" method="post">
+<form asp-controller="Incidents" asp-action="Create" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
     <div class="mb-3">
@@ -31,6 +31,12 @@
         <label asp-for="Description" class="form-label"></label>
         <textarea asp-for="Description" class="form-control" rows="4"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AttachmentFile" class="form-label"></label>
+        <input asp-for="AttachmentFile" class="form-control" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+        <span asp-validation-for="AttachmentFile" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Zgłoś incydent</button>

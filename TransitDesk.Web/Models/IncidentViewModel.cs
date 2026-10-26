@@ -23,4 +23,8 @@ public class IncidentViewModel
     [DataType(DataType.DateTime)]
     [DateNotInFuture(ErrorMessage = "Data zdarzenia nie może być datą z przyszłości.")]
     public DateTime OccurredAt { get; set; } 
+    [Display(Name = "Załącznik (Zdjęcie lub PDF)")]
+    public IFormFile? AttachmentFile { get; set; }
+
+    public string? AttachmentPath { get; set; }
 }
