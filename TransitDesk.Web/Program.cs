@@ -1,10 +1,11 @@
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using TransitDesk.Web.Constraints;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // SERVICES
-builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -12,6 +13,12 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
 builder.Services.Configure<RouteOptions>(options =>
 {
@@ -33,8 +40,21 @@ else
 
 app.UseStatusCodePagesWithReExecute("/Errors/Status", "?code={0}");
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+var supportedCultures = new[]
+{
+    new CultureInfo("pl-PL"),
+    new CultureInfo("en-US")
+};
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("pl-PL"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
+app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 app.UseAuthentication();
