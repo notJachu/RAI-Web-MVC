@@ -1,0 +1,63 @@
+@model IEnumerable<TransitDesk.Web.Models.IncidentViewModel>
+
+@{
+    ViewData["Title"] = "Lista incydentów";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Zgłoszone incydenty</h2>
+    <a asp-controller="Incidents" asp-action="Create" class="btn btn-primary">Zgłoś nowy incydent</a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nr pojazdu</th>
+                <th>Linia</th>
+                <th>Data zdarzenia</th>
+                <th>Opis</th>
+                <th>Załącznik</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var incident in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="@incident.VehicleSideNumber">
+                            @incident.VehicleSideNumber
+                        </a>
+                    </td>
+                    <td>@incident.LineNumber</td>
+                    <td>@incident.OccurredAt.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@incident.Description</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(incident.AttachmentPath))
+                        {
+                            <span class="text-success">Załączono plik</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">Brak</span>
+                        }
+                    </td>
+                    <td>
+                        @(incident.IsResolved ? "Rozwiązany" : "Oczekujący")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak zgłoszonych incydentów.</p>
+}

@@ -1,4 +1,4 @@
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +28,16 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicleList" asp-route-zaj="NowyPort">Pojazdy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicleList" asp-route-zaj="NowyPort">@Localizer["Vehicles"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="1111">Pojazd (1111)</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="1111">@Localizer["ExampleVehicle"]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicleCreatePage">@Localizer["CreateVehicle"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Incidents" asp-action="Index">@Localizer["Incidents"]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Incidents" asp-action="Create">@Localizer["CreateIncident"]</a>

@@ -68,5 +68,23 @@ namespace TransitDesk.Web.Resources.Views.Shared {
                 return ResourceManager.GetString("Privacy", resourceCulture);
             }
         }
+        
+        internal static string ExampleVehicle {
+            get {
+                return ResourceManager.GetString("ExampleVehicle", resourceCulture);
+            }
+        }
+        
+        internal static string Vehicles {
+            get {
+                return ResourceManager.GetString("Vehicles", resourceCulture);
+            }
+        }
+        
+        internal static string Incidents {
+            get {
+                return ResourceManager.GetString("Incidents", resourceCulture);
+            }
+        }
     }
 }

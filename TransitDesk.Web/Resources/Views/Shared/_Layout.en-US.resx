@@ -30,4 +30,13 @@
     <data name="CreateIncident" xml:space="preserve">
         <value>Add Incident</value>
     </data>
+    <data name="ExampleVehicle" xml:space="preserve">
+        <value>Vehicle 1111</value>
+    </data>
+    <data name="Vehicles" xml:space="preserve">
+        <value>Vehicles</value>
+    </data>
+    <data name="Incidents" xml:space="preserve">
+        <value>Incidents</value>
+    </data>
 </root>

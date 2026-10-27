@@ -6,6 +6,8 @@ namespace TransitDesk.Web.Models;
 
 public class IncidentViewModel
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage = "Numer taborowy jest wymagany.")]
     [Remote(action: "VerifyVehicleAvailable", controller: "Incidents", ErrorMessage = "Pojazd o podanym numerze nie istnieje lub jest wycofany.")]
     [Display(Name = "Numer taborowy pojazdu")]
@@ -17,14 +19,17 @@ public class IncidentViewModel
     
     [Required(ErrorMessage = "Opis jest wymagany.")]
     [StringLength(500, MinimumLength = 20, ErrorMessage = "Opis musi mieć od 20 do 500 znaków.")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Data zdarzenia jest wymagana.")]
     [DataType(DataType.DateTime)]
     [DateNotInFuture(ErrorMessage = "Data zdarzenia nie może być datą z przyszłości.")]
     public DateTime OccurredAt { get; set; } 
+    
     [Display(Name = "Załącznik (Zdjęcie lub PDF)")]
     public IFormFile? AttachmentFile { get; set; }
 
     public string? AttachmentPath { get; set; }
+
+    public bool IsResolved { get; set; }
 }

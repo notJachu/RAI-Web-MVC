@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using TransitDesk.Core.Entities;
+using TransitDesk.Core.Services;
 using TransitDesk.Web.Models;
 
 namespace TransitDesk.Web.Controllers;
 
-public class IncidentsController : Controller
+public class IncidentsController(IIncidentsService incidentsService, IVehiclesService vehiclesService) : Controller
 {
-
-  [HttpPost]
-  [AuditLog]
+    [HttpPost]
+    [AuditLog]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(IncidentViewModel model, IFormFile? attachmentFile)
     {
@@ -49,9 +50,27 @@ public class IncidentsController : Controller
             model.AttachmentPath = targetPath;
         }
 
-        // TODO: save incident in incident service
+        var incident = new Incident(
+            model.VehicleSideNumber,
+            model.LineNumber,
+            model.Description,
+            model.OccurredAt,
+            model.AttachmentPath,
+            isResolved: false);
 
-        return RedirectToAction("Index", "Home");
+        incidentsService.CreateIncident(incident);
+
+        TempData["SuccessMessage"] = $"Zgłoszenie incydentu dla pojazdu #{model.VehicleSideNumber} zostało pomyślnie zarejestrowane.";
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult Index()
+    {
+        var incidents = incidentsService.GetAllIncidents();
+        var viewModels = incidents.Select(MapToViewModel).ToList();
+        return View(viewModels);
     }
     
     [HttpGet]
@@ -63,12 +82,26 @@ public class IncidentsController : Controller
     [AcceptVerbs("GET", "POST")]
     public IActionResult VerifyVehicleAvailable(int vehicleSideNumber)
     {
-        bool isActive = true; // TODO: ADD VEHICLE SERVICE
+        var vehicle = vehiclesService.GetVehicleBySideNumber(vehicleSideNumber);
         
-        if (isActive)
+        if (vehicle != null)
         {
             return Json(true);
         }
-        return Json(false);
+        return Json($"Pojazd #{vehicleSideNumber} nie figuruje w czynnym rejestrze floty.");
+    }
+
+    private static IncidentViewModel MapToViewModel(Incident incident)
+    {
+        return new IncidentViewModel
+        {
+            Id = incident.Id,
+            VehicleSideNumber = incident.VehicleSideNumber,
+            LineNumber = incident.LineNumber,
+            Description = incident.Description,
+            OccurredAt = incident.OccurredAt,
+            AttachmentPath = incident.AttachmentPath,
+            IsResolved = incident.IsResolved
+        };
     }
 }

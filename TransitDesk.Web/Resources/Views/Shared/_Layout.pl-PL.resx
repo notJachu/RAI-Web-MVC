@@ -30,4 +30,13 @@
     <data name="Privacy" xml:space="preserve">
         <value>Prywatność</value>
     </data>
+    <data name="ExampleVehicle" xml:space="preserve">
+        <value>Pojazd 1111</value>
+    </data>
+    <data name="Vehicles" xml:space="preserve">
+        <value>Pojazdy</value>
+    </data>
+    <data name="Incidents" xml:space="preserve">
+        <value>Zdarzenia</value>
+    </data>
 </root>

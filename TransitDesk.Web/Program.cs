@@ -27,6 +27,7 @@ builder.Services.Configure<RouteOptions>(options =>
 });
 
 builder.Services.AddSingleton<IVehiclesService, VehicleService>();
+builder.Services.AddSingleton<IIncidentsService, IncidentsService>();
 
 var app = builder.Build();
 
