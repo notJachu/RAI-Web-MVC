@@ -8,11 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // SERVICES
 builder.Services.AddDistributedMemoryCache();
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => false;
+    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+});
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(15);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.SameSite = SameSiteMode.Lax;
 });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -60,6 +67,7 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCookiePolicy();
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,12 +1,19 @@
 @model IEnumerable<TransitDesk.Web.Models.VehicleViewModel>
+@using TransitDesk.Web.Extensions
 
 @{
     ViewData["Title"] = "Pojazdy";
+    var watchlist = Context.Session.GetObject<List<int>>("Watchlist") ?? new List<int>();
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Pojazdy @(ViewBag.DepotName != null ? $"- {ViewBag.DepotName}" : "")</h2>
-    <a asp-controller="Vehicles" asp-action="GetVehicleCreatePage" class="btn btn-primary">Dodaj pojazd</a>
+    <div>
+        <a asp-controller="Vehicles" asp-action="Watchlist" class="btn btn-outline-secondary me-2">
+            Obserwowane (@watchlist.Count)
+        </a>
+        <a asp-controller="Vehicles" asp-action="GetVehicleCreatePage" class="btn btn-primary">Dodaj pojazd</a>
+    </div>
 </div>
 
 @if (TempData["SuccessMessage"] != null)
@@ -16,7 +23,7 @@
 
 @if (Model != null && Model.Any())
 {
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
                 <th>Nr boczny</th>
@@ -32,6 +39,7 @@
         <tbody>
             @foreach (var vehicle in Model)
             {
+                var isWatched = watchlist.Contains(vehicle.SideNumber);
                 <tr>
                     <td>@vehicle.SideNumber</td>
                     <td>@vehicle.ModelName</td>
@@ -40,8 +48,22 @@
                     <td>@vehicle.Capacity</td>
                     <td>@(vehicle.IsLowFloor ? "Tak" : "Nie")</td>
                     <td>@vehicle.ServiceStatus</td>
-                    <td>
+                    <td class="text-nowrap">
                         <a asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="@vehicle.SideNumber" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+                        @if (isWatched)
+                        {
+                            <form asp-controller="Vehicles" asp-action="RemoveVehicleFromWatchlist" asp-route-sideNumber="@vehicle.SideNumber" method="post" class="d-inline">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Usuń z obserwowanych</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="Vehicles" asp-action="AddVehicleToWatchlist" asp-route-sideNumber="@vehicle.SideNumber" method="post" class="d-inline">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString" />
+                                <button type="submit" class="btn btn-sm btn-outline-success">+ Obserwuj</button>
+                            </form>
+                        }
                     </td>
                 </tr>
             }

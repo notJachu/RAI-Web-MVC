@@ -1,5 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using TransitDesk.Web.Extensions
 @inject IViewLocalizer Localizer
+@{
+    var watchlist = Context.Session.GetObject<List<int>>("Watchlist");
+    var watchlistCount = watchlist?.Count ?? 0;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +34,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicleList" asp-route-zaj="NowyPort">@Localizer["Vehicles"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Watchlist">
+                                Monitorowane <span class="badge bg-primary">@watchlistCount</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="1111">@Localizer["ExampleVehicle"]</a>
