@@ -1,0 +1,48 @@
+@model TransitDesk.Web.Models.VehicleViewModel
+
+@{
+    ViewData["Title"] = $"Pojazd #{Model.SideNumber}";
+}
+
+<h2>Pojazd #@Model.SideNumber</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table table-bordered w-auto">
+    <tr>
+        <th>Numer boczny</th>
+        <td>@Model.SideNumber</td>
+    </tr>
+    <tr>
+        <th>Model</th>
+        <td>@Model.ModelName</td>
+    </tr>
+    <tr>
+        <th>Zajezdnia</th>
+        <td>@Model.DepotName</td>
+    </tr>
+    <tr>
+        <th>Rok produkcji</th>
+        <td>@Model.ProductionYear</td>
+    </tr>
+    <tr>
+        <th>Pojemność</th>
+        <td>@Model.Capacity</td>
+    </tr>
+    <tr>
+        <th>Niskopodłogowy</th>
+        <td>@(Model.IsLowFloor ? "Tak" : "Nie")</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>@Model.ServiceStatus</td>
+    </tr>
+</table>
+
+<div class="mt-3">
+    <a asp-controller="Vehicles" asp-action="GetVehicleList" asp-route-zaj="@Model.DepotName" class="btn btn-secondary">Powrót do listy</a>
+    <a asp-controller="Vehicles" asp-action="GetVehicleCreatePage" class="btn btn-primary">Dodaj pojazd</a>
+</div>

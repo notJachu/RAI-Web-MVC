@@ -1,6 +1,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using TransitDesk.Core.Services;
 using TransitDesk.Web.Constraints;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ builder.Services.Configure<RouteOptions>(options =>
 {
     options.ConstraintMap.Add("fleetSideNo", typeof(FleetSideNumberConstraint));
 });
+
+builder.Services.AddSingleton<IVehiclesService, VehicleService>();
 
 var app = builder.Build();
 

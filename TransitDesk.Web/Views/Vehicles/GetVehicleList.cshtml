@@ -1,0 +1,54 @@
+@model IEnumerable<TransitDesk.Web.Models.VehicleViewModel>
+
+@{
+    ViewData["Title"] = "Pojazdy";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Pojazdy @(ViewBag.DepotName != null ? $"- {ViewBag.DepotName}" : "")</h2>
+    <a asp-controller="Vehicles" asp-action="GetVehicleCreatePage" class="btn btn-primary">Dodaj pojazd</a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nr boczny</th>
+                <th>Model</th>
+                <th>Zajezdnia</th>
+                <th>Rok prod.</th>
+                <th>Pojemność</th>
+                <th>Niskopodłogowy</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model)
+            {
+                <tr>
+                    <td>@vehicle.SideNumber</td>
+                    <td>@vehicle.ModelName</td>
+                    <td>@vehicle.DepotName</td>
+                    <td>@vehicle.ProductionYear</td>
+                    <td>@vehicle.Capacity</td>
+                    <td>@(vehicle.IsLowFloor ? "Tak" : "Nie")</td>
+                    <td>@vehicle.ServiceStatus</td>
+                    <td>
+                        <a asp-controller="Vehicles" asp-action="GetVehicle" asp-route-number="@vehicle.SideNumber" class="btn btn-sm btn-outline-primary">Szczegóły</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Brak pojazdów.</p>
+}
