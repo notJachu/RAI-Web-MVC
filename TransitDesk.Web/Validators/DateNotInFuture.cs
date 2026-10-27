@@ -10,7 +10,8 @@ public class DateNotInFutureAttribute : ValidationAttribute
         {
             if (dateTimeValue > DateTime.Now)
             {
-                return new ValidationResult(ErrorMessage ?? "Data nie może być z przyszłości.");
+                var memberNames = validationContext.MemberName != null ? new[] { validationContext.MemberName } : null;
+                return new ValidationResult(ErrorMessage ?? "Data nie może być z przyszłości.", memberNames);
             }
         }
 
